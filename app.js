@@ -32,11 +32,12 @@ async function main(){
     await mongoose.connect(dbUrl);
 };
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
+
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
-app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
